@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    password: 123456
+    username: root
+    url: jdbc:mysql://192.168.183.130:3306/springboot
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: 192.168.183.130
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  #开启驼峰命名
+logging:
+  level.com.atguigu.cache.mapper: debug
+
+debug: true
