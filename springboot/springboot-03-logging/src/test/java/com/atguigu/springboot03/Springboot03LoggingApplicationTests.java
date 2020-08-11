@@ -19,6 +19,7 @@ public class Springboot03LoggingApplicationTests {
         logger.debug("debug");
         //springboot 默认的是info级别的，没有指定就使用springboot默认规定的级别，
         // 我们还可以通过配置文件进行设置springboot的日志级别
+        //
         logger.info("info");
         logger.warn("warn");
         logger.error("error");
