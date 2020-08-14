@@ -25,6 +25,8 @@
             <version>0.2.0</version>
         </dependency>
 
+
+
         <!--为了api层不报错，引入mybatis-plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -33,5 +35,12 @@
             <!--可选依赖，只是为了防止工程mp的注解报错问题-->
 <!--            <optional>true</optional>-->
         </dependency>
+
+        <dependency>
+            <groupId>io.shardingjdbc</groupId>
+            <artifactId>sharding-jdbc-core</artifactId>
+            <version>2.0.3</version>
+        </dependency>
+
     </dependencies>
 </project>
