@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * sku库存Controller
  */
+@CrossOrigin
 @RestController
 @Api(tags = "PmsSkuStockController", description = "sku商品库存管理")
 @RequestMapping("/sku")

@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -15,6 +16,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class UmsAdminParam {
     @ApiModelProperty(value = "用户名", required = true)
     @NotEmpty(message = "用户名不能为空")
+    @Length(min = 6,max = 18,message = "用户名长度必须是6-18位")
     private String username;
     @ApiModelProperty(value = "密码", required = true)
     @NotEmpty(message = "密码不能为空")

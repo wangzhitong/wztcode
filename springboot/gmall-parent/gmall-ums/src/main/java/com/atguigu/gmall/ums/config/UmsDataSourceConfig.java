@@ -1,6 +1,5 @@
-package com.atguigu.gmall.pms.config;
+package com.atguigu.gmall.ums.config;
 
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import io.shardingjdbc.core.api.MasterSlaveDataSourceFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,7 @@ import java.sql.SQLException;
  * @author Ryan
  */
 @Configuration
-public class PmsDataSourceConfig {
+public class UmsDataSourceConfig {
 
     @Bean
     public DataSource dataSource() throws IOException, SQLException {
@@ -29,14 +28,5 @@ public class PmsDataSourceConfig {
 
         DataSource dataSource = MasterSlaveDataSourceFactory.createDataSource(file);
         return dataSource;
-    }
-
-    /**
-     * mybatis分页插件
-     * @return
-     */
-    @Bean
-    public PaginationInterceptor paginationInterceptor(){
-        return new PaginationInterceptor();
     }
 }

@@ -7,6 +7,8 @@ import com.atguigu.gmall.admin.utils.JwtTokenUtil;
 import com.atguigu.gmall.ums.entity.Admin;
 import com.atguigu.gmall.ums.service.AdminService;
 import com.atguigu.gmall.to.CommonResult;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import groovy.util.logging.Slf4j;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,8 @@ import java.util.Map;
 /**
  * 后台用户管理
  */
+@Slf4j
+@CrossOrigin
 @RestController
 @Api(tags = "AdminController", description = "后台用户管理")
 @RequestMapping("/admin")
@@ -39,7 +44,7 @@ public class UmsAdminController {
 
     @ApiOperation(value = "用户注册")
     @PostMapping(value = "/register")
-    public Object register(@RequestBody UmsAdminParam umsAdminParam, BindingResult result) {
+    public Object register(@Valid @RequestBody UmsAdminParam umsAdminParam, BindingResult result) {
         Admin admin = null;
         //TODO 完成注册功能
 
@@ -51,6 +56,7 @@ public class UmsAdminController {
     public Object login(@RequestBody UmsAdminLoginParam umsAdminLoginParam, BindingResult result) {
         //去数据库登陆
         Admin admin = adminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
+
         //登陆成功生成token，此token携带基本用户信息，以后就不用去数据库了
         String token = jwtTokenUtil.generateToken(admin);
         if (token == null) {
@@ -91,10 +97,11 @@ public class UmsAdminController {
     @ResponseBody
     public Object getAdminInfo(HttpServletRequest request) {
         String oldToken = request.getHeader(tokenHeader);
-        String userName = jwtTokenUtil.getUserNameFromToken(oldToken);
+        String userName = jwtTokenUtil.getUserNameFromToken(oldToken.substring(tokenHead.length()));
 
-        Admin umsAdmin = null;
-//                adminService.getOne(new QueryWrapper<Admin>().eq("username",userName));
+        //dubbo rpc调用远程方法是，只能调用mybatis生成的一些简单方法，带泛型的方法rpc调用不了
+//        Admin umsAdmin = adminService.getOne(new QueryWrapper<Admin>().eq("username",userName));
+        Admin umsAdmin = adminService.getUserInfo(userName);
         Map<String, Object> data = new HashMap<>();
         data.put("username", umsAdmin.getUsername());
         data.put("roles", new String[]{"TEST"});

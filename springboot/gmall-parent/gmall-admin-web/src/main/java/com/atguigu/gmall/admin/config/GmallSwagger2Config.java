@@ -1,6 +1,6 @@
 package com.atguigu.gmall.admin.config;
 
-import io.swagger.annotations.Api;
+//import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -15,16 +15,39 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 public class GmallSwagger2Config {
 
+//    @Bean("后台用户模块")
+//    public Docket userApis() {
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .groupName("后台用户模块")
+//                .select()
+//                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+//                .apis(RequestHandlerSelectors.basePackage("com.atguigu.gmall.admin"))
+//                .paths(PathSelectors.regex("/admin.*"))
+//                .build()
+//                .apiInfo(apiInfo())
+//                .enable(true);
+//    }
+//
+//    private ApiInfo apiInfo() {
+//        return new ApiInfoBuilder()
+//                .title("谷粒商城-后台管理系统平台接口文档")
+//                .description("提供pms、oms、ums、cms、sms模块的文档")
+//                .termsOfServiceUrl("http://www.atguigu.com/")
+//                .version("1.0")
+//                .build();
+//    }
+
+
     @Bean("后台用户模块")
-    public Docket userApis() {
+    public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("后台用户模块")
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .paths(PathSelectors.regex("/admin.*"))
-                .build()
+                .enable(true)
                 .apiInfo(apiInfo())
-                .enable(true);
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.atguigu.gmall.admin"))
+                .paths(PathSelectors.any())
+                .build();
     }
 
     private ApiInfo apiInfo() {

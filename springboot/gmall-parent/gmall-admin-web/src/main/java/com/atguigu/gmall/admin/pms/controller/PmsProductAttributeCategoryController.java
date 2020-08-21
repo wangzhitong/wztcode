@@ -1,7 +1,7 @@
 package com.atguigu.gmall.admin.pms.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-//import com.atguigu.gmall.pms.service.ProductAttributeCategoryService;
+import com.atguigu.gmall.pms.service.ProductAttributeCategoryService;
 import com.atguigu.gmall.to.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,12 +13,13 @@ import java.util.List;
  * 商品属性分类Controller
  * Created by atguigu 4/26.
  */
+@CrossOrigin
 @RestController
 @Api(tags = "PmsProductAttributeCategoryController", description = "商品属性分类管理")
 @RequestMapping("/productAttribute/category")
 public class PmsProductAttributeCategoryController {
-//    @Reference
-//    private ProductAttributeCategoryService productAttributeCategoryService;
+    @Reference
+    private ProductAttributeCategoryService productAttributeCategoryService;
 
     @ApiOperation("添加商品属性分类")
     @PostMapping(value = "/create")
